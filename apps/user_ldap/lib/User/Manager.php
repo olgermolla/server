@@ -170,13 +170,14 @@ class Manager {
 	 */
 	public function getAttributes($minimal = false) {
 		$attributes = array_merge(Access::UUID_ATTRIBUTES, ['dn', 'uid', 'samaccountname', 'memberof']);
-		$possible = array(
+		$possible = [
 			$this->access->getConnection()->ldapExpertUUIDUserAttr,
 			$this->access->getConnection()->ldapQuotaAttribute,
 			$this->access->getConnection()->ldapEmailAttribute,
 			$this->access->getConnection()->ldapUserDisplayName,
 			$this->access->getConnection()->ldapUserDisplayName2,
-		);
+			$this->access->getConnection()->ldapExtStorageHomeAttribute,
+		];
 		foreach($possible as $attr) {
 			if(!is_null($attr)) {
 				$attributes[] = $attr;
